@@ -28,37 +28,79 @@
 main {
 	/* min-width: 100vw; */
 	height: 100vh;
-	background-color: rgb(6, 0, 15);
-	color: white;
+	background-color: white;
+	color: black;
 	padding: 10%;
 	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.nav-list {
-	gap: 5rem;
+.center {
+	border: 1px solid black;
+	border-radius: 9999999999rem;
+	width: 10rem;
+	aspect-ratio: 1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
-section {
-	grid-template-columns: repeat(3, 1fr);
-	display: grid;
-	grid-auto-flow: row;
-	gap: 1rem;
-	width: 100%;
+.center::after {
+	content: " ";
+	position: absolute;
+	border-radius: 99999999rem;
+	background-color: black;
+	min-width: 0.5rem;
+	min-height: 0.5rem;
 }
 
-@media only screen and (max-width: 360px) {
-	section {
-		grid-template-columns: repeat(1, 1fr);
+.center::before {
+	content: " ";
+	position: absolute;
+	border-radius: 99999999rem;
+	border: 1px solid black;
+	min-width: 125%;
+	min-height: 125%;
+}
+
+.hour-hand {
+	width: 20%;
+	height: 0.3rem;
+	background-color: red;
+	transform-origin: left;
+	transform: rotate(-90deg);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	border-radius: 9999999rem;
+	animation: minuteRotation 3600s infinite linear;
+}
+.minute-hand {
+	width: 50%;
+	height: 0.3rem;
+	border-radius: 9999999rem;
+	background-color: blue;
+	transform-origin: left;
+	transform: rotate(0deg);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	animation: minuteRotation 60s infinite linear;
+}
+
+.twelve {
+	position: absolute;
+	top: -20%;
+}
+
+@keyframes minuteRotation {
+	0% {
+		transform: rotate(-90deg);
 	}
-}
 
-@media (min-width: 600px) {
-	section {
-		background-color: red;
-	}
-}
-@media only screen and (min-width: 1080px) {
-	section {
-		background-color: blue;
+	100% {
+		transform: rotate(270deg);
 	}
 }
