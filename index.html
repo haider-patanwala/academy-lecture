@@ -5,13 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tailwind Practice</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .flexCenter{@apply flex justify-center items-center;}
+          .nav-links{
+            @apply hover:accent-color hover:text-2xl transition-all ease-in-out duration-300;
+          }
+          .accent-color {
+            @apply text-[#641464];
+          }
+        }
+      </style>
 
 </head>
 
-<body id="body" class="body">
-    <main>
-
-
+<body id="body">
+    <header class="flex justify-between px-24 py-10 border-b border-gray-200"><img src="./assets/logo.webp"
+            alt="virarhub logo" />
+        <nav>
+            <ul class="flex gap-8 text-xl font-medium  items-center h-full">
+                <li><a class="nav-links" href="#">Startup Quest</a></li>
+                <li><a class="nav-links" href="#">About us</a></li>
+                <li><a class="nav-links" href="#">Services</a></li>
+                <li><a class="nav-links" href="#">Programs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="min-w-screen flex relative px-24 py-10 items-start  justify-start flex-col">
+        <section
+            class="bg-[url('./assets/bgimage.webp')] flex justify-center items-start flex-col space-y-20  bg-cover p-20 bg-no-repeat w-full h-[50rem] relative rounded-2xl">
+            <h2 class="text-[5rem] font-bold text-left text-white  w-2/3">Empowering Tomorrow's Innovators Today!
+            </h2>
+            <button class="bg-white text-2xl font-medium px-10 py-5 rounded-2xl">Submit</button>
+        </section>
     </main>
 </body>
 
