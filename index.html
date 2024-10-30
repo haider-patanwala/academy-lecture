@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tailwind Practice</title>
+  <title>TODO - App using dom</title>
   <link rel="stylesheet" href="./style.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="./script.js" defer></script>
+  <script src="todo.js" defer></script>
+  <!-- <script src="./script.js" defer></script> -->
   <style type="text/tailwindcss">
     @layer utilities {
           .flexCenter{@apply flex justify-center items-center;}
@@ -36,7 +37,7 @@
 <body id="body" class="bg-slate-900 text-white flex relative  flex-col items-center justify-start py-10 min-h-screen">
   <main class="max-w-[70rem] flex flex-col gap-10 w-full relative bg-transparent h-full">
 
-    <form id="form" action="" class="flex w-full relative gap-2 ">
+    <form id="form" class="flex w-full relative gap-2 ">
       <input type="text" id="input" placeholder="create a task"
         class="bg-transparent border-2 rounded-lg w-3/4 text-2xl px-4 py-2 border-white text-white outline-none">
       <button id="add" type="submit" role="button"
