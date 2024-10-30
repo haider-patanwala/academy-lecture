@@ -1,13 +1,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind Practice</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style type="text/tailwindcss">
-        @layer utilities {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind Practice</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./script.js" defer></script>
+  <style type="text/tailwindcss">
+    @layer utilities {
           .flexCenter{@apply flex justify-center items-center;}
           .nav-links{
             @apply hover:accent-color hover:text-2xl transition-all ease-in-out duration-300;
@@ -15,31 +16,35 @@
           .accent-color {
             @apply text-[#641464];
           }
+          .list-style{
+            @apply w-full relative text-white space-y-4 text-xl;
+            li {
+                @apply  text-slate-900 relative w-full gap-1 flex justify-between items-center ;
+              p {
+                @apply px-4 py-2 rounded-lg bg-gray-50 w-3/4;
+              }
+              button {
+                @apply bg-red-500 text-white px-4 py-2 rounded-lg w-1/4 hover:opacity-80;
+              }
+            }
+          }
         }
       </style>
 
 </head>
 
-<body id="body">
-    <header class="flex justify-between px-24 py-10 border-b border-gray-200"><img src="./assets/logo.webp"
-            alt="virarhub logo" />
-        <nav>
-            <ul class="flex gap-8 text-xl font-medium  items-center h-full">
-                <li><a class="nav-links" href="#">Startup Quest</a></li>
-                <li><a class="nav-links" href="#">About us</a></li>
-                <li><a class="nav-links" href="#">Services</a></li>
-                <li><a class="nav-links" href="#">Programs</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main class="min-w-screen flex relative px-24 py-10 items-start  justify-start flex-col">
-        <section
-            class="bg-[url('./assets/bgimage.webp')] flex justify-center items-start flex-col space-y-20  bg-cover p-20 bg-no-repeat w-full h-[50rem] relative rounded-2xl">
-            <h2 class="text-[5rem] font-bold text-left text-white  w-2/3">Empowering Tomorrow's Innovators Today!
-            </h2>
-            <button class="bg-white text-2xl font-medium px-10 py-5 rounded-2xl">Submit</button>
-        </section>
-    </main>
+<body id="body" class="bg-slate-900 text-white flex relative  flex-col items-center justify-start py-10 min-h-screen">
+  <main class="max-w-[70rem] flex flex-col gap-10 w-full relative bg-transparent h-full">
+
+    <form id="form" action="" class="flex w-full relative gap-2 ">
+      <input type="text" id="input" placeholder="create a task"
+        class="bg-transparent border-2 rounded-lg w-3/4 text-2xl px-4 py-2 border-white text-white outline-none">
+      <button id="add" type="submit" role="button"
+        class="bg-white border-2 rounded-lg w-1/4 text-2xl px-4 py-2 border-white text-slate-900 hover:opacity-80 outline-none">Add</button>
+    </form>
+    <ol id="list" class="list-style">
+    </ol>
+  </main>
 </body>
 
 </html>
