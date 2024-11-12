@@ -1,44 +1,33 @@
-import { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import ProductCard from "./components/ProductCard";
-import Signup from "./components/Signup";
+import HomePage from "./components/HomePage";
+import ProductPage from "./components/ProductPage";
+import SingleProduct from "./components/SingleProduct";
+import Test from "./components/Test";
 
-async function fetchProduct() {
-	// API Documentation
-	// https://dummyjson.com/docs/product
-	const data = await fetch("https://dummyjson.com/products", {
-		method: "GET",
-	})
-		.then((res) => res.json())
-		.then((data) => data);
-
-	return data;
-}
 
 function App() {
-	const [product, setproduct] = useState([]);
-
-	useEffect(() => {
-		fetchProduct().then((data) => setproduct(data.products));
-	}, []);
-
-	// console.log(product);
+const router = createBrowserRouter([
+	{
+		path:"/",
+		element:<HomePage/>
+	},{
+		path:"/products",
+		element:<ProductPage/>
+	},
+	{
+		path:"/products/:id",
+		element:<SingleProduct/>
+	},
+	{
+		path:"/test",
+		element:<Test/>
+	}
+])
 
 	return (
-		<>
-			<Signup />
-			<main className=' relative  justify-center grid grid-cols-3 gap-10 items-center text-center'>
-				{product.map((data, i) => {
-					return (
-						<ProductCard
-							key={i}
-							props={data}
-						/>
-					);
-				})}
-			</main>
-		</>
-	);
+		<RouterProvider router={router} />
+	)
 }
 
 export default App;

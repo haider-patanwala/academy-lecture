@@ -1,5 +1,6 @@
 import React from "react";
 import BuyForm from "./BuyForm";
+import { Link } from "react-router-dom";
 
 async function BuyProduct({ id: number }) {
 	// API Documentation
@@ -33,10 +34,11 @@ function ProductCard({ props }) {
 			<p className=' text-slate-900 font-normal  text-base w-fit'>
 				{props.description}
 			</p>
-			<BuyForm
-				email={"haider@edquest.propp"}
-				orderData={props}
-			/>
+			<Link to={`/products/${props.id}`}>
+				<p className='bg-blue-500 text-white px-4 py-2 rounded-md'>
+					Buy Now
+				</p>
+			</Link>
 		</div>
 	);
 }
