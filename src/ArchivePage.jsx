@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import ProductCard from "./components/ProductCard";
 import Signup from "./components/Signup";
+import { useCartState } from "./utils/store";
 
 async function fetchProduct() {
 	// API Documentation
@@ -15,14 +16,15 @@ async function fetchProduct() {
 	return data;
 }
 
-function App() {
+function ArchivePage() {
 	const [product, setproduct] = useState([]);
+	const { cartItems, setCartItems } = useCartState();
 
 	useEffect(() => {
 		fetchProduct().then((data) => setproduct(data.products));
 	}, []);
 
-	// console.log(product);
+	console.log(cartItems);
 
 	return (
 		<>
@@ -41,4 +43,4 @@ function App() {
 	);
 }
 
-export default App;
+export default ArchivePage;

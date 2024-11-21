@@ -31,7 +31,7 @@ function Signup({}) {
 			});
 	}
 
-	console.log(form);
+	// console.log(form);
 	return (
 		<>
 			{!isOpen ? (

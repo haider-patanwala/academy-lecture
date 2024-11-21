@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import BuyForm from "./BuyForm";
+import { useCartState } from "../utils/store";
 
 async function BuyProduct({ id: number }) {
 	// API Documentation
@@ -14,6 +15,7 @@ async function BuyProduct({ id: number }) {
 }
 
 function ProductCard({ props }) {
+	const { cartItems, setCartItems } = useCartState();
 	return (
 		<div className='aspect-[3/4] border p-5 text-left flexCol gap-5 rounded-md max-w-[25rem] min-w-[10rem]'>
 			<img
@@ -37,6 +39,12 @@ function ProductCard({ props }) {
 				email={"haider@edquest.propp"}
 				orderData={props}
 			/>
+			<button
+				onClick={() => {
+					setCartItems(props);
+				}}>
+				Add to Cart
+			</button>
 		</div>
 	);
 }
