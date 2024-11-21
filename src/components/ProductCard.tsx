@@ -17,7 +17,7 @@ async function BuyProduct({ id: number }) {
 function ProductCard({ props }) {
 	const { cartItems, setCartItems } = useCartState();
 	return (
-		<div className='aspect-[3/4] border p-5 text-left flexCol gap-5 rounded-md max-w-[25rem] min-w-[10rem]'>
+		<div className='h-full border p-5 text-left flexCol gap-5 rounded-md max-w-[25rem] min-w-[10rem]'>
 			<img
 				src={props.thumbnail}
 				alt={props.thumbnail}
@@ -32,19 +32,21 @@ function ProductCard({ props }) {
 			<p className='w-fit text-xl text-slate-800 font-medium'>
 				Price : {props.price}
 			</p>
-			<p className=' text-slate-900 font-normal  text-base w-fit'>
+			<p className=' text-slate-900 line-clamp-3 font-normal  text-base w-fit'>
 				{props.description}
 			</p>
-			<BuyForm
-				email={"haider@edquest.propp"}
-				orderData={props}
-			/>
-			<button
-				onClick={() => {
-					setCartItems(props);
-				}}>
-				Add to Cart
-			</button>
+			<div className='mt-auto relative flex-col flex w-full'>
+				<BuyForm
+					email={"haider@edquest.propp"}
+					orderData={props}
+				/>
+				<button
+					onClick={() => {
+						setCartItems(props);
+					}}>
+					Add to Cart
+				</button>
+			</div>
 		</div>
 	);
 }
