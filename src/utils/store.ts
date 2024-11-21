@@ -7,7 +7,7 @@ interface CartStateType {
 }
 
 export const useCartState = create<CartStateType>((set) => ({
-	cartItems: [{ hello: "kkk" }],
+	cartItems: [],
 	setCartItems: (Product: ProductTypes) =>
-		set((cartItems: any) => ({ cartItems: [Product] })),
+		set((prev: any) => ({ cartItems: [...prev.cartItems, Product] })),
 }));
