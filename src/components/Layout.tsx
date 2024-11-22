@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import CartDrawer from "./src/components/CartDrawer";
+import CartDrawer from "./CartDrawer";
 
 function Layout() {
 	const [iscartVisible, setIscartVisible] = useState(false);
