@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import ProductCard from "./components/ProductCard";
 import Signup from "./components/Signup";
 import { useCartState } from "./utils/store";
