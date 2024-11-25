@@ -18,6 +18,10 @@ export default function App() {
 						element={<HomePage />}
 					/>
 					<Route
+						path='/checkout'
+						element={<HomePage />}
+					/>
+					<Route
 						path='*'
 						element={<NotFound />}
 					/>
