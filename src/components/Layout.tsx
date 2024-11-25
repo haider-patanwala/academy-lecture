@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import CartDrawer from "./CartDrawer";
+import Signup from "./Signup";
 
 function Layout() {
 	const [iscartVisible, setIscartVisible] = useState(false);
 	return (
 		<>
 			<header className='w-screen max-w-7xl    h-fit relative flexCenter'>
-				<p className='font-bold text-blue-400 font-serif mr-auto text-2xl'>
+				<Link
+					to={"/"}
+					className='font-bold text-blue-400 font-serif mr-auto text-2xl'>
 					ApnaShop
-				</p>
+				</Link>
+				<Link to={"/product-archive"}>Shop</Link>
+				<Signup />
+
 				<button
 					onClick={() => {
 						setIscartVisible((prev) => !prev);

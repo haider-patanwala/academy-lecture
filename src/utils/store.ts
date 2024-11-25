@@ -2,12 +2,14 @@ import { create } from "zustand";
 import { ProductTypes } from "./types";
 
 interface CartStateType {
-	cartItems: any;
+	cartItems: ProductTypes[];
 	setCartItems: (Product: any) => void;
+	setQuantity: (props: ProductTypes[]) => void;
 }
 
 export const useCartState = create<CartStateType>((set) => ({
 	cartItems: [],
-	setCartItems: (Product: ProductTypes) =>
-		set((prev: any) => ({ cartItems: [...prev.cartItems, Product] })),
+	setCartItems: (props: ProductTypes) =>
+		set((prev: any) => ({ cartItems: [...prev.cartItems, props] })),
+	setQuantity: (props) => set(() => ({ cartItems: props })),
 }));

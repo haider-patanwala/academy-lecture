@@ -36,7 +36,7 @@ function Signup({}) {
 		<>
 			{!isOpen ? (
 				<button onClick={() => setIsOpen((previous) => !previous)}>
-					Open Modal
+					Login
 				</button>
 			) : (
 				<form

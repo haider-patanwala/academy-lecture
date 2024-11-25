@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { useCartState } from "../utils/store";
 import { CgCross } from "react-icons/cg";
@@ -11,7 +11,11 @@ function CartDrawer({
 	isVisible: boolean;
 	setIscartVisible: any;
 }) {
-	const { cartItems, setCartItems } = useCartState();
+	const { cartItems, setCartItems, setQuantity } = useCartState();
+
+	useEffect(() => {
+		console.log(cartItems);
+	}, [cartItems]);
 
 	return (
 		<div
@@ -28,37 +32,71 @@ function CartDrawer({
 				{/* <ul>{CartItems.map{}}</ul> */}
 				<ul>
 					{cartItems.map((item, i) => {
-						<li
-							key={i}
-							className='flex justify-between overflow-clip '>
-							<img
-								src='https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png'
-								alt='image'
-								className='w-1/4 h-full object-cover aspect-square '
-							/>
-							<div className='flex justify-start w-3/4 flex-col gap-1'>
-								<div className='flex '>
-									<h5 className='text-2xl'>Essence Mascara Lash Princess</h5>
-								</div>
-								<div className='flex w-full items-start flex-col gap-1'>
-									<h5>Rs. 499</h5>
-									<div className='flex gap-4'>
-										<button onClick={() => {}}>
-											<TiMinus />
-										</button>
-										<p>Qty: 1</p>
-										<button onClick={() => {}}>
-											<TiPlus />
-										</button>
+						const currentItemIndex = cartItems.indexOf(item);
+
+						return (
+							<li
+								key={i}
+								className='flex justify-between overflow-clip '>
+								<img
+									src='https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png'
+									alt='image'
+									className='w-1/4 h-full object-cover aspect-square '
+								/>
+								<div className='flex justify-start w-3/4 flex-col gap-1'>
+									<div className='flex '>
+										<h5 className='text-2xl'>{item.title}</h5>
 									</div>
+									<div className='flex w-full items-start flex-col gap-1'>
+										<h5>Rs. {item.price}</h5>
+										<div className='flex gap-4'>
+											<button
+												onClick={() => {
+													console.log(
+														"cartitemsplice",
+														cartItems.splice(currentItemIndex, 1)
+													);
+
+													console.log(cartItems);
+
+													cartItems.length > 0 &&
+														(cartItems[currentItemIndex].qty < 2
+															? setQuantity(
+																	cartItems.splice(currentItemIndex, 1)
+															  )
+															: setQuantity(
+																	cartItems.map((items, i) => {
+																		return i === currentItemIndex
+																			? { ...items, qty: items.qty - 1 }
+																			: items;
+																	})
+															  ));
+												}}>
+												<TiMinus />
+											</button>
+											<p>Qty: {item.qty}</p>
+											<button
+												onClick={() => {
+													setQuantity(
+														cartItems.map((items, i) => {
+															return i === currentItemIndex
+																? { ...items, qty: items.qty + 1 }
+																: items;
+														})
+													);
+												}}>
+												<TiPlus />
+											</button>
+										</div>
+									</div>
+									<button
+										onClick={() => {}}
+										className='w-36 mt-3 bg-red-400 px-4 py-2 text-white'>
+										Remove
+									</button>
 								</div>
-								<button
-									onClick={() => {}}
-									className='w-36 mt-3 bg-red-400 px-4 py-2 text-white'>
-									Remove
-								</button>
-							</div>
-						</li>;
+							</li>
+						);
 					})}
 				</ul>
 			</div>

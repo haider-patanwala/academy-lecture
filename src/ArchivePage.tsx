@@ -27,7 +27,6 @@ function ArchivePage() {
 
 	return (
 		<>
-			<Signup />
 			<main className=' relative  justify-center grid grid-cols-3 gap-10 items-center text-center'>
 				{product.map((data, i) => {
 					return (
