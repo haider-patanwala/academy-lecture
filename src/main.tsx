@@ -6,14 +6,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ArchivePage from "./ArchivePage";
 import Layout from "./components/Layout";
 import NotFound from "./components/NotFound";
+import HomePage from "./components/HomePage";
 
 export default function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route
-					path='/'
-					element={<Layout />}>
+				<Route element={<Layout />}>
+					<Route
+						path='/'
+						element={<HomePage />}
+					/>
 					<Route
 						path='*'
 						element={<NotFound />}
