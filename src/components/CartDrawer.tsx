@@ -3,7 +3,7 @@ import { TiMinus, TiPlus } from "react-icons/ti";
 import { useCartState } from "../utils/store";
 import { CgCross } from "react-icons/cg";
 import { ImCross } from "react-icons/im";
-import { ThemeContext } from "./Layout";
+import { CreateOrder } from "@/utils/funcs";
 
 function CartDrawer({
 	isVisible,
@@ -14,17 +14,13 @@ function CartDrawer({
 }) {
 	const { cartItems, setCartItems, setQuantity } = useCartState();
 
-	const theme = useContext(ThemeContext);
-
-	console.log("themevalue", theme);
-
 	useEffect(() => {
 		console.log(cartItems);
 	}, [cartItems]);
 
 	return (
 		<div
-			className={`bg-gray-100  border-l  z-[1000]  py-10 px-5 transition-all duration-300 ease-in-out  shadow fixed right-0 top-0 min-h-screen min-w-[30rem] ${
+			className={`bg-gray-100  border-l  z-[1000]  py-10 px-5 transition-all duration-300 ease-in-out  shadow fixed right-0 top-0 min-h-screen min-w-[30rem] w-[30rem] ${
 				isVisible ? "translate-x-[0%]" : "translate-x-[100%]"
 			}`}>
 			<button
@@ -35,7 +31,7 @@ function CartDrawer({
 			{/*============== Cart Items ============== */}
 			<div className='h-[calc(100%-5rem)] w-full bg-transparent overflow-y-scroll'>
 				{/* <ul>{CartItems.map{}}</ul> */}
-				<ul>
+				<ul className='flexCol gap-10'>
 					{cartItems.map((item, i) => {
 						const currentItemIndex = cartItems.indexOf(item);
 
@@ -44,7 +40,7 @@ function CartDrawer({
 								key={i}
 								className='flex justify-between overflow-clip '>
 								<img
-									src='https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png'
+									src={item.images[0]}
 									alt='image'
 									className='w-1/4 h-full object-cover aspect-square '
 								/>
@@ -61,7 +57,7 @@ function CartDrawer({
 														(cartItems[currentItemIndex].qty <= 1
 															? setQuantity(
 																	cartItems.filter(
-																		(items) => items.id !== item.id
+																		(currentItem) => currentItem.id !== item.id
 																	)
 															  )
 															: setQuantity(
@@ -90,7 +86,13 @@ function CartDrawer({
 										</div>
 									</div>
 									<button
-										onClick={() => {}}
+										onClick={() => {
+											setQuantity(
+												cartItems.filter(
+													(currentItem) => currentItem.id !== item.id
+												)
+											);
+										}}
 										className='w-36 mt-3 bg-red-400 px-4 py-2 text-white'>
 										Remove
 									</button>
@@ -102,10 +104,18 @@ function CartDrawer({
 			</div>
 			{/* ==============Action Buttons ============== */}
 			<div className=' flex min-w-full h-20 gap-0 bottom-0 absolute '>
-				<button className='border-0 rounded-none flexCenter w-1/2 bg-green-400 text-black'>
+				<button
+					onClick={() => {
+						CreateOrder({ ...cartItems });
+					}}
+					className='border-0 rounded-none flexCenter w-1/2 bg-green-400 text-black'>
 					Buy Now
 				</button>
-				<button className='border-0 rounded-none flexCenter w-1/2 bg-red-400 text-black'>
+				<button
+					onClick={() => {
+						setQuantity([]);
+					}}
+					className='border-0 rounded-none flexCenter w-1/2 bg-red-400 text-black'>
 					Clear Cart
 				</button>
 			</div>
