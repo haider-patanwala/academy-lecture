@@ -57,17 +57,12 @@ function CartDrawer({
 										<div className='flex gap-4'>
 											<button
 												onClick={() => {
-													console.log(
-														"cartitemsplice",
-														cartItems.splice(currentItemIndex, 1)
-													);
-
-													console.log(cartItems);
-
 													cartItems.length > 0 &&
-														(cartItems[currentItemIndex].qty < 2
+														(cartItems[currentItemIndex].qty <= 1
 															? setQuantity(
-																	cartItems.splice(currentItemIndex, 1)
+																	cartItems.filter(
+																		(items) => items.id !== item.id
+																	)
 															  )
 															: setQuantity(
 																	cartItems.map((items, i) => {
