@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { useCartState } from "../utils/store";
 import { CgCross } from "react-icons/cg";
 import { ImCross } from "react-icons/im";
+import { ThemeContext } from "./Layout";
 
 function CartDrawer({
 	isVisible,
@@ -12,6 +13,10 @@ function CartDrawer({
 	setIscartVisible: any;
 }) {
 	const { cartItems, setCartItems, setQuantity } = useCartState();
+
+	const theme = useContext(ThemeContext);
+
+	console.log("themevalue", theme);
 
 	useEffect(() => {
 		console.log(cartItems);

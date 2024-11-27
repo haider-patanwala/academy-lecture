@@ -17,7 +17,6 @@ async function BuyProduct({ id: number }) {
 function ProductCard({ props }) {
 	const { cartItems, setCartItems } = useCartState();
 
-	console.log(cartItems);
 	return (
 		<div className='h-full border p-5 text-left flexCol gap-5 rounded-md max-w-[25rem] min-w-[10rem]'>
 			<img

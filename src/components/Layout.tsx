@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import CartDrawer from "./CartDrawer";
 import Signup from "./Signup";
 
+export const ThemeContext = createContext<any>(null);
 function Layout() {
 	const [iscartVisible, setIscartVisible] = useState(false);
+	const [theme, setTheme] = useState("dark");
+
 	return (
-		<>
+		<ThemeContext.Provider value={{ theme, setTheme }}>
 			<header className='w-screen max-w-7xl    h-fit relative flexCenter'>
 				<Link
 					to={"/"}
@@ -29,7 +32,7 @@ function Layout() {
 				isVisible={iscartVisible}
 			/>
 			<footer>This Is my Footer</footer>
-		</>
+		</ThemeContext.Provider>
 	);
 }
 
