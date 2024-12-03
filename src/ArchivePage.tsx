@@ -17,13 +17,10 @@ async function fetchProduct() {
 
 function ArchivePage() {
 	const [product, setproduct] = useState([]);
-	const { cartItems, setCartItems } = useCartState();
 
 	useEffect(() => {
 		fetchProduct().then((data) => setproduct(data.products));
 	}, []);
-
-	console.log(cartItems);
 
 	return (
 		<>

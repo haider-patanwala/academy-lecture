@@ -1,13 +1,55 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTrigger,
+} from "./ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { isLoggedIn, signupformOpen } from "@/utils/store";
 
 function Signup({}) {
-	const [isOpen, setIsOpen] = useState(false);
+	const { isOpen, setIsOpen } = useContext(signupformOpen);
+
+	const { loggedIn, setIsLoggedIn } = isLoggedIn();
+
 	const [form, setForm] = useState({
 		email: "",
 		password: "",
 	});
 
-	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+	function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		console.log(
+			JSON.stringify({
+				email: form.email,
+				password: form.password,
+			})
+		);
+		return fetch("http://localhost:3001/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				email: form.email,
+				password: form.password,
+			}),
+		})
+			.then((res) => {
+				if (res.ok) {
+					setIsLoggedIn(true);
+					setIsOpen(false);
+				}
+			})
+			.then((res) => {
+				console.log(res);
+			});
+	}
+	function handleSignup(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		console.log(
 			JSON.stringify({
@@ -25,7 +67,12 @@ function Signup({}) {
 				password: form.password,
 			}),
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				if (res.ok) {
+					setIsLoggedIn(true);
+					setIsOpen(false);
+				}
+			})
 			.then((res) => {
 				console.log(res);
 			});
@@ -35,7 +82,7 @@ function Signup({}) {
 	return (
 		<>
 			{!isOpen ? (
-				<button onClick={() => setIsOpen((previous) => !previous)} className="text-white hover:text-yellow-500">
+				<button onClick={() => setIsOpen((previous) => !previous)}>
 					Login
 				</button>
 			) : (

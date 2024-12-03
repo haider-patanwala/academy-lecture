@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BuyForm from "./BuyForm";
 import { useCartState } from "../utils/store";
 
-async function BuyProduct({ id: number }) {
+async function BuyProduct({ id }: { id: number }) {
 	// API Documentation
 	// https://dummyjson.com/docs/product
 	const data = await fetch("https://dummyjson.com/products", {
@@ -14,10 +14,11 @@ async function BuyProduct({ id: number }) {
 	return data;
 }
 
-function ProductCard({ props }) {
+type props = any;
+
+function ProductCard({ props }: props) {
 	const { cartItems, setCartItems } = useCartState();
 
-	console.log(cartItems);
 	return (
 		<div className='h-full p-5 text-left flexCol gap-5 border-2 border-yellow-950 rounded-md max-w-[25rem] min-w-[10rem] text-yellow-600'>
 			<img
