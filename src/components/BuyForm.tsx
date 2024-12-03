@@ -20,7 +20,7 @@ function BuyForm({ email, orderData }) {
 	return (
 		<>
 			<button
-				className='bg-green-400 rounded text-white px-4 py-2'
+				className='bg-yellow-950 rounded text-white px-4 py-2'
 				onClick={() => handleBuy({ email, order: orderData })}>
 				Buy Product
 			</button>

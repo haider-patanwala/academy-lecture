@@ -35,7 +35,7 @@ function Signup({}) {
 	return (
 		<>
 			{!isOpen ? (
-				<button onClick={() => setIsOpen((previous) => !previous)}>
+				<button onClick={() => setIsOpen((previous) => !previous)} className="text-white hover:text-yellow-500">
 					Login
 				</button>
 			) : (
