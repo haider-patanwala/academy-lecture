@@ -20,22 +20,22 @@ function ProductCard({ props }: props) {
 	const { cartItems, setCartItems } = useCartState();
 
 	return (
-		<div className='h-full border p-5 text-left flexCol gap-5 rounded-md max-w-[25rem] min-w-[10rem]'>
+		<div className='h-full p-5 text-left flexCol gap-5 border-2 border-yellow-950 rounded-md max-w-[25rem] min-w-[10rem] text-yellow-600'>
 			<img
 				src={props.thumbnail}
 				alt={props.thumbnail}
-				className='w-full bg-gray-300  object-contain aspect-video'
+				className='w-full bg-[#f0e4d4] rounded-md object-contain aspect-video'
 			/>
-			<h1 className='text-2xl text-left text-slate-900 font-medium'>
+			<h1 className='text-2xl text-left text-yellow-600 font-medium'>
 				{props.title}
 			</h1>
-			<p className='text-sm text-left bg-slate-500 text-white rounded-full w-fit px-2 py-1'>
+			<p className='text-sm text-left bg-yellow-950 text-white rounded-lg w-fit px-2 py-1'>
 				{props.category}
 			</p>
-			<p className='w-fit text-xl text-slate-800 font-medium'>
+			<p className='w-fit text-xl font-medium text-yellow-600'>
 				Price : {props.price}
 			</p>
-			<p className=' text-slate-900 line-clamp-3 font-normal  text-base w-fit'>
+			<p className='line-clamp-3 font-normal text-base w-fit text-white'>
 				{props.description}
 			</p>
 			<div className='mt-auto relative flex-col flex w-full'>

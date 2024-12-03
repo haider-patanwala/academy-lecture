@@ -20,7 +20,7 @@ function CartDrawer({
 
 	return (
 		<div
-			className={`bg-gray-100  border-l  z-[1000]  py-10 px-5 transition-all duration-300 ease-in-out  shadow fixed right-0 top-0 min-h-screen min-w-[30rem] w-[30rem] ${
+			className={`bg-gray-100  border-l  z-[1000]  py-10 px-5 transition-all duration-300 ease-in-out  shadow fixed right-0 top-0 min-h-screen min-w-[30rem] ${
 				isVisible ? "translate-x-[0%]" : "translate-x-[100%]"
 			}`}>
 			<button
@@ -38,7 +38,7 @@ function CartDrawer({
 						return (
 							<li
 								key={i}
-								className='flex justify-between overflow-clip '>
+								className='flex justify-between overflow-clip'>
 								<img
 									src={item.images[0]}
 									alt='image'
@@ -86,13 +86,7 @@ function CartDrawer({
 										</div>
 									</div>
 									<button
-										onClick={() => {
-											setQuantity(
-												cartItems.filter(
-													(currentItem) => currentItem.id !== item.id
-												)
-											);
-										}}
+										onClick={() => {}}
 										className='w-36 mt-3 bg-red-400 px-4 py-2 text-white'>
 										Remove
 									</button>
@@ -104,18 +98,10 @@ function CartDrawer({
 			</div>
 			{/* ==============Action Buttons ============== */}
 			<div className=' flex min-w-full h-20 gap-0 bottom-0 absolute '>
-				<button
-					onClick={() => {
-						CreateOrder({ ...cartItems });
-					}}
-					className='border-0 rounded-none flexCenter w-1/2 bg-green-400 text-black'>
+				<button className='border-0 rounded-none flexCenter w-1/2 bg-green-400 text-black'>
 					Buy Now
 				</button>
-				<button
-					onClick={() => {
-						setQuantity([]);
-					}}
-					className='border-0 rounded-none flexCenter w-1/2 bg-red-400 text-black'>
+				<button className='border-0 rounded-none flexCenter w-1/2 bg-red-400 text-black'>
 					Clear Cart
 				</button>
 			</div>

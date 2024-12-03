@@ -14,26 +14,19 @@ function Layout() {
 	console.log("loggedin", loggedIn);
 
 	return (
-		<signupformOpen.Provider value={{ isOpen, setIsOpen }}>
+		<>
 			<header className='w-screen max-w-7xl    h-fit relative flexCenter'>
 				<Link
-					to={"/"}
-					className='font-bold text-blue-400 font-serif mr-auto text-2xl'>
-					ApnaShop
+					to={"/"} className='font-bold text-white font-serif mr-auto text-2xl'>
+          ApnaShop
 				</Link>
 				<Link to={"/product-archive"}>Shop</Link>
-				{!loggedIn && (
-					<button
-						onClick={() => {
-							setIsOpen((prev: boolean) => !prev);
-						}}>
-						Login
-					</button>
-				)}
+				<Signup />
+
 				<button
 					onClick={() => {
 						setIscartVisible((prev) => !prev);
-					}}>
+					}} className="text-white hover:text-yellow-500">
 					Cart
 				</button>
 			</header>
@@ -43,8 +36,7 @@ function Layout() {
 				isVisible={iscartVisible}
 			/>
 			<footer>This Is my Footer</footer>
-			<Signup />
-		</signupformOpen.Provider>
+		</>
 	);
 }
 

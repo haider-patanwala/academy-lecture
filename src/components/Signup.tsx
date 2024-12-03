@@ -81,94 +81,53 @@ function Signup({}) {
 	// console.log(form);
 	return (
 		<>
-			<Dialog
-				open={isOpen}
-				onOpenChange={() => setIsOpen(!isOpen)}>
-				<DialogContent className='max-w-fit'>
-					<Tabs
-						defaultValue='login'
-						className='w-fit'>
-						<TabsList className='grid w-full grid-cols-2'>
-							<TabsTrigger value='login'>Login</TabsTrigger>
-							<TabsTrigger value='signup'>Signup</TabsTrigger>
-						</TabsList>
-						<TabsContent value='login'>
-							<form onSubmit={handleLogin}>
-								<div className=' z-[9999] bg-white gap-20 flexCol w-[40rem]'>
-									<Input
-										type='text'
-										name='email'
-										value={form.email}
-										onChange={(e) =>
-											setForm((previous) => ({
-												...previous,
-												email: e.target.value,
-											}))
-										}
-										className='border'
-										placeholder='Please Enter your Email Id '
-									/>
-									<Input
-										type='password'
-										name='password'
-										className='border'
-										placeholder='Please Enter your password'
-										value={form.password}
-										onChange={(e) => {
-											setForm((prev) => ({
-												...prev,
-												password: e.target.value,
-											}));
-										}}
-									/>
-									<Button
-										className='border px-4 py-2'
-										onClick={() => {}}>
-										Submit
-									</Button>
-								</div>
-							</form>
-						</TabsContent>
-						<TabsContent value='signup'>
-							<form onSubmit={handleSignup}>
-								<div className=' z-[9999] bg-white gap-20 flexCol w-[40rem]'>
-									<Input
-										type='text'
-										name='email'
-										value={form.email}
-										onChange={(e) =>
-											setForm((previous) => ({
-												...previous,
-												email: e.target.value,
-											}))
-										}
-										className='border'
-										placeholder='Please Enter your Email Id '
-									/>
-									<Input
-										type='password'
-										name='password'
-										className='border'
-										placeholder='Please Enter your password'
-										value={form.password}
-										onChange={(e) => {
-											setForm((prev) => ({
-												...prev,
-												password: e.target.value,
-											}));
-										}}
-									/>
-									<Button
-										className='border px-4 py-2'
-										onClick={() => {}}>
-										Submit
-									</Button>
-								</div>
-							</form>
-						</TabsContent>
-					</Tabs>
-				</DialogContent>
-			</Dialog>
+			{!isOpen ? (
+				<button onClick={() => setIsOpen((previous) => !previous)}>
+					Login
+				</button>
+			) : (
+				<form
+					className={`fixed ${
+						isOpen ? "visible" : "hidden"
+					} h-screen w-screen flexCenter relative z-[9999] transition-all duration-500 bg-gray-950/20`}
+					onSubmit={handleSubmit}>
+					<button
+						className='w-full bg-transparent z-10 h-full absolute inset-0'
+						onClick={() => {
+							setIsOpen(false);
+						}}
+					/>
+					<div className='border z-[9999] bg-white gap-20 p-10 flexCol w-[40rem]'>
+						<input
+							type='text'
+							name='email'
+							value={form.email}
+							onChange={(e) =>
+								setForm((previous) => ({
+									...previous,
+									email: e.target.value,
+								}))
+							}
+						/>
+						<input
+							type='password'
+							name='password'
+							value={form.password}
+							onChange={(e) => {
+								setForm((prev) => ({
+									...prev,
+									password: e.target.value,
+								}));
+							}}
+						/>
+						<button
+							className='border px-4 py-2'
+							onClick={() => {}}>
+							Submit
+						</button>
+					</div>
+				</form>
+			)}
 		</>
 	);
 }
