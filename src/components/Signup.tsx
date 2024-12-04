@@ -10,9 +10,16 @@ import {
 } from "./ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { isLoggedIn, signupformOpen } from "@/utils/store";
+import { useCookies } from "react-cookie";
 
 function Signup({}) {
 	const { isOpen, setIsOpen } = useContext(signupformOpen);
+	const [cookies, setCookie, removeCookie] = useCookies(
+		["userAuth", "productsCost"],
+		{
+			doNotParse: true,
+		}
+	);
 
 	const { loggedIn, setIsLoggedIn } = isLoggedIn();
 
@@ -21,7 +28,7 @@ function Signup({}) {
 		password: "",
 	});
 
-	function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+	async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		console.log(
 			JSON.stringify({
@@ -29,7 +36,7 @@ function Signup({}) {
 				password: form.password,
 			})
 		);
-		return fetch("http://localhost:3001/login", {
+		const res = await fetch("http://localhost:3001/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -38,18 +45,21 @@ function Signup({}) {
 				email: form.email,
 				password: form.password,
 			}),
-		})
-			.then((res) => {
-				if (res.ok) {
-					setIsLoggedIn(true);
-					setIsOpen(false);
-				}
-			})
-			.then((res) => {
-				console.log(res);
-			});
+		});
+		// console.log(res);
+
+		const data = await res.json();
+		if (res.ok) {
+			// setIsLoggedIn(true);
+
+			setIsOpen(false);
+			setCookie("userAuth", data.user);
+		}
 	}
-	function handleSignup(e: React.FormEvent<HTMLFormElement>) {
+
+	console.log(cookies.userAuth);
+
+	async function handleSignup(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		console.log(
 			JSON.stringify({
@@ -57,7 +67,7 @@ function Signup({}) {
 				password: form.password,
 			})
 		);
-		return fetch("http://localhost:3001/user", {
+		const res = await fetch("http://localhost:3001/user", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -66,16 +76,16 @@ function Signup({}) {
 				email: form.email,
 				password: form.password,
 			}),
-		})
-			.then((res) => {
-				if (res.ok) {
-					setIsLoggedIn(true);
-					setIsOpen(false);
-				}
-			})
-			.then((res) => {
-				console.log(res);
-			});
+		});
+		// console.log(res);
+
+		const data = await res.json();
+		if (res.ok) {
+			// setIsLoggedIn(true);
+
+			setIsOpen(false);
+			setCookie("userAuth", data.user);
+		}
 	}
 
 	// console.log(form);

@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import CartDrawer from "./CartDrawer";
 import Signup from "./Signup";
 import { isLoggedIn, signupformOpen } from "@/utils/store";
+import { useCookies } from "react-cookie";
 
 function Layout() {
 	const [iscartVisible, setIscartVisible] = useState(false);
@@ -10,8 +11,8 @@ function Layout() {
 	const singupformState = useContext(signupformOpen);
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const { loggedIn } = isLoggedIn();
-	console.log("loggedin", loggedIn);
+	const [cookies, removeCookie] = useCookies(["userAuth"]);
+	console.log("loggedin", !!cookies.userAuth);
 
 	return (
 		<signupformOpen.Provider value={{ isOpen, setIsOpen }}>
@@ -22,12 +23,19 @@ function Layout() {
 					ApnaShop
 				</Link>
 				<Link to={"/product-archive"}>Shop</Link>
-				{!loggedIn && (
+				{!cookies.userAuth ? (
 					<button
 						onClick={() => {
 							setIsOpen((prev: boolean) => !prev);
 						}}>
 						Login
+					</button>
+				) : (
+					<button
+						onClick={() => {
+							removeCookie("userAuth", null);
+						}}>
+						Logout
 					</button>
 				)}
 				<button
