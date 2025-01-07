@@ -207,3 +207,259 @@ db.collection.dropIndex("index_name");
 ```
 
 ---
+
+
+- How Many Users are active
+    
+    ```jsx
+    [
+      {
+        $match: {
+          isActive:true
+        }
+      },
+      {
+        $count: 'Total Number'
+      }
+    ]
+    ```
+    
+- What is Average age of users
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: null,
+          Average:{$avg:"$age"}
+        }
+      }
+    ]
+    ```
+    
+- Find Total Number of males and females
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: "$gender",
+          Average:{$avg:"$age"},
+          TotalUsers:{
+            $sum:1
+          }
+        }
+      }
+    ]
+    ```
+    
+- What is Average age of users by gender
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: "$gender",
+          Average:{$avg:"$age"}
+        }
+      }
+    ]
+    ```
+    
+- List Top 5 most common fruits
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: "$favoriteFruit",
+          Average:{$avg:"$age"},
+          TotalUsers:{
+            $sum:1
+          }
+        }
+      },
+      {
+        $sort: {
+          TotalUsers: -1
+        }
+      }
+    ]
+    ```
+    
+- Which Country has highest number of users
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: "$company.location.country",
+          Average:{$avg:"$age"},
+          TotalUsers:{
+            $sum:1
+          }
+        }
+      },
+      {
+        $sort: {
+          TotalUsers: -1
+        }
+      }
+    ]
+    ```
+    
+- Which Country has highest number of active users
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: "$company.location.country",
+          ActiveUsers: {
+            $sum: { $cond: [{ $eq: ["$isActive", true] }, 1, 0] } 
+          },
+          Average: { $avg: "$age" }, 
+        }
+      },
+      {
+        $sort: {
+          ActiveUsers: -1 
+        }
+      }
+    ]
+    
+    ```
+    
+- Find Unique Eyecolors
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: "$eyeColor",
+          totalNumberofUsers:{
+            $sum:1
+          }
+        }
+      },
+      {
+        $sort: {
+          totalNumberofUsers: -1 
+        }
+      }
+    ]
+    
+    ```
+    
+- What is average numbers of tags per user
+    
+    ```jsx
+    [{$group: {
+      _id: null,
+      AverageNumberOfTags: {$avg:{$size:{$ifNull:["$tags", []]}}}
+    }}
+    ]
+    ```
+    
+- How many users have tag enim
+    
+    ```jsx
+    [
+      {$match: {
+        tags:"enim"
+      }},
+      {$count: 'NumberOfUsersWithTag_enmim'}
+    ]
+    ```
+    
+- Name and age of users with tag velit and who are inactive
+    
+    ```jsx
+    [
+      {$match: {
+        tags:"velit",
+        isActive:false,
+      }},
+      {
+        $project: {
+          name:1,
+          age:1
+        }
+      }
+    ]
+    ```
+    
+- How many user have phone number starting with +1 (940)
+    
+    ```jsx
+    [
+      {$match: {
+        "company.phone":/^\+1 \(940\)/,
+      }},
+      {
+        $count: 'NumberOfUsersWithPhone'
+      }
+    ]
+    ```
+    
+- Top 5 Recently registered users
+    
+    ```jsx
+    [
+      {$sort: {
+        registered: 1
+      }},
+      {
+        $limit: 5
+      }
+    ]
+    ```
+    
+- categorize Users by favorite fruits
+    
+    ```jsx
+    [
+      {
+        $group: {
+          _id: "$favoriteFruit",
+         users:
+           {$push:"$name",}
+         
+        }
+      }
+    ]
+    ```
+    
+- Total Number of Users with ad as second tag
+    
+    ```jsx
+    [
+      {
+        $match: {
+          "tags.1":"ad"
+        }
+      },
+      {
+        $count: 'Numberofusers'
+      }
+    ]
+    ```
+    
+- List all the companies and Total Number of Users in country USA
+    
+    ```jsx
+    [
+      {
+        $match: {
+          "company.location.country": "USA"
+      }},
+      {
+        $group: {
+          _id: "$company.title",
+          TotalNumberOfUsers: {
+            $sum: 1
+          }
+        }
+      }
+    ]
+    ```
